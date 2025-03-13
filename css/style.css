@@ -1,15 +1,15 @@
-/* Coreweaver Labs Website - Main Stylesheet */
+/* Coreweaver Labs Website - Updated Stylesheet */
 
 /* Global Styles */
 :root {
-  --primary-color: #2A9D8F;
-  --secondary-color: #264653;
-  --accent-color: #E9C46A;
-  --light-bg: #F5F5F0;
-  --dark-text: #333333;
+  --primary-color: #0088FF;
+  --secondary-color: #0A1A40;
+  --accent-color: #00CCFF;
+  --light-bg: #FFFFFF;
+  --dark-text: #212121;
   --light-text: #FFFFFF;
   --card-bg: #FFFFFF;
-  --grid-bg: #F5F5F0;
+  --grid-bg: #F5F5F7;
 }
 
 * {
@@ -19,7 +19,7 @@
 }
 
 body {
-  font-family: 'Inter', sans-serif;
+  font-family: 'Helvetica Neue', Helvetica, Arial, sans-serif;
   background-color: var(--light-bg);
   color: var(--dark-text);
   line-height: 1.6;
@@ -34,7 +34,7 @@ body {
 
 /* Typography */
 h1, h2, h3, h4, h5, h6 {
-  font-family: 'Space Grotesk', sans-serif;
+  font-family: 'Helvetica Neue', Helvetica, Arial, sans-serif;
   font-weight: 700;
   margin-bottom: 1rem;
 }
@@ -60,7 +60,7 @@ p {
 
 /* Header & Navigation */
 header {
-  background-color: var(--light-bg);
+  background-color: var(--secondary-color);
   padding: 20px 0;
   position: fixed;
   width: 100%;
@@ -77,7 +77,7 @@ header {
 .logo {
   font-size: 1.8rem;
   font-weight: 700;
-  color: var(--secondary-color);
+  color: var(--light-text);
 }
 
 .logo img {
@@ -95,13 +95,13 @@ nav ul li {
 
 nav ul li a {
   text-decoration: none;
-  color: var(--secondary-color);
+  color: var(--light-text);
   font-weight: 500;
   transition: color 0.3s ease;
 }
 
 nav ul li a:hover {
-  color: var(--primary-color);
+  color: var(--accent-color);
 }
 
 .cta-button {
@@ -113,10 +113,12 @@ nav ul li a:hover {
   text-transform: uppercase;
   letter-spacing: 1px;
   transition: background-color 0.3s ease;
+  text-decoration: none;
+  display: inline-block;
 }
 
 .cta-button:hover {
-  background-color: var(--secondary-color);
+  background-color: var(--accent-color);
 }
 
 /* Hero Section */
@@ -124,8 +126,9 @@ nav ul li a:hover {
   height: 100vh;
   display: flex;
   align-items: center;
-  background-color: var(--light-bg);
+  background: linear-gradient(135deg, var(--secondary-color) 0%, var(--primary-color) 100%);
   padding-top: 80px;
+  color: var(--light-text);
 }
 
 .hero-content {
@@ -233,12 +236,12 @@ nav ul li a:hover {
 }
 
 .status-live {
-  background-color: #4CAF50;
+  background-color: var(--primary-color);
   color: white;
 }
 
 .status-beta {
-  background-color: #2196F3;
+  background-color: var(--accent-color);
   color: white;
 }
 
@@ -255,7 +258,7 @@ nav ul li a:hover {
 }
 
 .product-button:hover {
-  background-color: var(--secondary-color);
+  background-color: var(--accent-color);
 }
 
 /* Staking Section */
