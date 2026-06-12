@@ -1,0 +1,15 @@
+# Build output
+dist/
+
+# Dependency directories
+node_modules/
+
+# Local environment files
+.env
+.env.*
+!.env.example
+
+# OS/editor noise
+.DS_Store
+.vscode/
+.idea/
