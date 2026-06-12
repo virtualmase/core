@@ -1,41 +1,73 @@
-# Coreweaver Labs - README
+# Coreweaver Labs Website
 
-## Project Overview
-This package contains a comprehensive mockup and implementation plan for the Coreweaver Labs website. The design is inspired by TensorPlex AI and focuses on showcasing Coreweaver Labs' mission of building infrastructure for decentralized AI and integration with the Bittensor ecosystem.
+Static marketing site, launch plan, and implementation notes for Coreweaver Labs. The repository has been revived as a lightweight static project so it can be validated, built, and deployed before a future framework migration is justified.
 
-## Package Contents
+## Project Status
 
-### Design Mockup
-- `index.html` - HTML mockup of the homepage
-- `css/style.css` - CSS styling for the mockup
+This is a dormant-project infrastructure pass. The current source of truth remains `index.html` and `css/style.css`, with supporting images in `images/` and strategy documents in Markdown. Product URLs, partner logos, APR claims, and public launch copy should be reviewed before production release.
 
-### Documentation
-- `site_structure.md` - Detailed website structure and pages
-- `content_sections.md` - Content for each website section
-- `functionality_features.md` - Planned functionality and features
-- `implementation_recommendations.md` - Platform and development recommendations
-- `wordpress_theme_recommendations.md` - WordPress theme options and timeline
-- `color_typography_guide.md` - Color palette and typography specifications
-- `implementation_checklist.md` - Step-by-step implementation checklist
+## Repository Contents
 
-## Design Highlights
-- Modern, clean design with a focus on decentralized AI
-- 3D illustrations for visual appeal (placeholder locations in mockup)
-- Sections for staking, delegation, and self-sustaining network features
-- Responsive design that works on all devices
-- Color scheme that conveys innovation and trustworthiness
+### Website
 
-## Implementation Options
-1. **WordPress** - Recommended for ease of content management and available plugins
-2. **Next.js** - Recommended for better performance and Web3 integration
-3. **Custom HTML/CSS/JS** - Recommended for maximum flexibility
+- `index.html` - Homepage mockup and content sections.
+- `css/style.css` - Site styling, responsive layout, product placeholders, and partner cards.
+- `images/` - Approved logo and illustration assets currently used by the page.
 
-## Next Steps
-1. Review the mockup and documentation
-2. Select preferred implementation platform
-3. Finalize design assets (logo, illustrations, etc.)
-4. Begin implementation following the provided checklist
-5. Develop core functionality for staking, delegation, and network features
+### Infrastructure
 
-## Contact
-For any questions or further assistance with implementation, please reach out to your project manager.
+- `package.json` - Local scripts for validation, build, and preview.
+- `scripts/check-static-links.mjs` - Verifies local asset references and in-page anchors.
+- `scripts/build-static.mjs` - Produces a deployable static artifact in `dist/`.
+- `.github/workflows/static-site.yml` - CI check that runs the same project validation command.
+
+### Planning Docs
+
+- `docs/activation-plan.md` - Dormant-project activation plan and brainstormed workstreams.
+- `site_structure.md` - Detailed website structure and pages.
+- `content_sections.md` - Content for each website section.
+- `functionality_features.md` - Planned functionality and features.
+- `implementation_recommendations.md` - Platform and development recommendations.
+- `wordpress_theme_recommendations.md` - WordPress theme options and timeline.
+- `color_typography_guide.md` - Color palette and typography specifications.
+- `implementation_checklist.md` - Step-by-step implementation checklist.
+
+## Local Development
+
+Prerequisites:
+
+- Node.js 18 or newer.
+- Python 3 if you want to use the lightweight preview server.
+
+Run checks and build the static site:
+
+```bash
+npm run check
+```
+
+Preview locally from the repository root:
+
+```bash
+npm run serve
+```
+
+Then open <http://localhost:4173>.
+
+## Build Output
+
+`npm run build` creates `dist/` with:
+
+- `index.html`
+- `css/`
+- `images/`
+- `build-info.json`
+
+The `dist/` directory is intentionally ignored by Git and can be uploaded to static hosts such as Netlify, Vercel static output, Cloudflare Pages, GitHub Pages, or an object-storage/CDN pipeline.
+
+## Suggested Next Steps
+
+1. Confirm product destination URLs and replace section-only CTA links.
+2. Replace text partner placeholders with approved logo assets.
+3. Audit public claims, especially reward/APR language and product status badges.
+4. Add SEO/social metadata after the public domain and messaging are finalized.
+5. Decide whether the next phase needs a framework migration or can remain static.

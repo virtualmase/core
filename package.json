@@ -1,0 +1,16 @@
+{
+  "name": "coreweaver-labs-site",
+  "version": "0.1.0",
+  "private": true,
+  "description": "Static marketing site and implementation planning docs for Coreweaver Labs.",
+  "type": "module",
+  "scripts": {
+    "build": "node scripts/build-static.mjs",
+    "check": "npm run check:links && npm run build",
+    "check:links": "node scripts/check-static-links.mjs",
+    "serve": "python3 -m http.server 4173"
+  },
+  "engines": {
+    "node": ">=18"
+  }
+}
