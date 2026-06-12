@@ -5,6 +5,58 @@ import { fileURLToPath } from 'node:url';
 const root = dirname(dirname(fileURLToPath(import.meta.url)));
 const html = await readFile(join(root, 'index.html'), 'utf8');
 const failures = [];
+
+const lineNumberFor = (offset) => html.slice(0, offset).split('\n').length;
+
+const voidElements = new Set([
+  'area',
+  'base',
+  'br',
+  'col',
+  'embed',
+  'hr',
+  'img',
+  'input',
+  'link',
+  'meta',
+  'param',
+  'source',
+  'track',
+  'wbr',
+]);
+const stack = [];
+const tagPattern = /<!--[^]*?-->|<![^>]*>|<\/?([a-zA-Z][\w:-]*)(?:\s[^<>]*)?>/g;
+let tagMatch;
+while ((tagMatch = tagPattern.exec(html)) !== null) {
+  const [tag, rawName] = tagMatch;
+  if (!rawName) continue;
+
+  const name = rawName.toLowerCase();
+  const line = lineNumberFor(tagMatch.index);
+  const isClosing = tag.startsWith('</');
+  const isSelfClosing = tag.endsWith('/>') || voidElements.has(name);
+
+  if (isClosing) {
+    const current = stack.pop();
+    if (!current) {
+      failures.push(`Unexpected closing </${name}> at line ${line}`);
+      continue;
+    }
+    if (current.name !== name) {
+      failures.push(
+        `Mismatched closing </${name}> at line ${line}; expected </${current.name}> for <${current.name}> opened at line ${current.line}`,
+      );
+    }
+    continue;
+  }
+
+  if (!isSelfClosing) stack.push({ name, line });
+}
+
+for (const current of stack.reverse()) {
+  failures.push(`Unclosed <${current.name}> opened at line ${current.line}`);
+}
+
 const localTargets = [...html.matchAll(/(?:src|href)="([^"]+)"/g)]
   .map(([, target]) => target)
   .filter((target) => !target.startsWith('#'))
@@ -35,9 +87,11 @@ for (const anchor of anchors) {
 }
 
 if (failures.length > 0) {
-  console.error('Static link check failed:');
+  console.error('Static site check failed:');
   for (const failure of failures) console.error(`- ${failure}`);
   process.exit(1);
 }
 
-console.log(`Validated ${localTargets.length} local asset references and ${anchors.length} in-page anchors.`);
+console.log(
+  `Validated HTML structure, ${localTargets.length} local asset references, and ${anchors.length} in-page anchors.`,
+);
